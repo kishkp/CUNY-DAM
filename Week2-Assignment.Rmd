@@ -1,0 +1,84 @@
+---
+title: 'CUNY- DA & M - Week 2 Assignment'
+author: 'Kishore Prasad'
+date: 'February 7, 2016'
+output: html_document
+---
+
+First we are to download the data from a github repository
+
+```{r}
+library(RCurl)
+datafile<-getURL('https://raw.githubusercontent.com/kishkp/CUNY-DAM/master/flag.data', ssl.verifypeer = FALSE )
+flagsdata<-read.csv(text = datafile, header=FALSE, stringsAsFactors = FALSE)
+
+```
+
+Let's now name the columns for the data that was downloaded.
+
+```{r}
+colnames(flagsdata)<- c('name', 'landmass', 'zone', 'area', 'population', 'language', 'religion', 'bars', 'stripes', 'colours', 'red', 'green', 'blue', 'gold', 'white', 'black', 'orange', 'mainhue', 'circles', 'crosses', 'saltires', 'quarters', 'sunstars', 'crescent', 'triangle', 'icon', 'animate', 'text', 'topleft', 'botright')
+
+```
+
+We now convert the columns in the data to factors with readable labels.
+
+```{r}
+
+flagsdata$`landmass` <- factor(flagsdata$`landmass`, levels=c('1','2', '3', '4', '5', '6'), labels=c('N.America', 'S.America', 'Europe', 'Africa', 'Asia', 'Oceania'))
+
+flagsdata$`zone` <- factor(flagsdata$`zone`, levels=c('1','2','3','4'), labels=c('NE','SE','SW','NW'))
+
+flagsdata$`language` <- factor(flagsdata$`language`, levels=c('1','2','3','4','5','6','7','8','9','10'), labels=c('English', 'Spanish', 'French', 'German', 'Slavic', 'Other Indo-European', 'Chinese', 'Arabic','Japanese/Turkish/Finnish/Magyar', 'Others'))
+
+flagsdata$`religion` <- factor(flagsdata$`religion`, levels=c('0','1','2','3','4','5','6','7'), labels=c('Catholic', 'Other Christian', 'Muslim', 'Buddhist', 'Hindu','Ethnic', 'Marxist', 'Others'))
+
+flagsdata$`red` <- factor(flagsdata$`red`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`green` <- factor(flagsdata$`green`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`blue` <- factor(flagsdata$`blue`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`gold` <- factor(flagsdata$`gold`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`white` <- factor(flagsdata$`white`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`black` <- factor(flagsdata$`black`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`orange` <- factor(flagsdata$`orange`, levels=c('0','1'), labels=c('absent','present'))
+
+flagsdata$`crescent` <- factor(flagsdata$`crescent`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`triangle` <- factor(flagsdata$`triangle`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`icon` <- factor(flagsdata$`icon`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`animate` <- factor(flagsdata$`animate`, levels=c('0','1'), labels=c('absent','present'))
+flagsdata$`text` <- factor(flagsdata$`text`, levels=c('0','1'), labels=c('absent','present'))
+```
+
+colnames(flagsdata)<- c('name', 'landmass', 'zone', 'area', 'population', 'language', 'religion', 'bars', 'stripes', 'colours', 'red', 'green', 'blue', 'gold', 'white', 'black', 'orange', 'mainhue', 'circles', 'crosses', 'saltires', 'quarters', 'sunstars', 'crescent', 'triangle', 'icon', 'animate', 'text', 'topleft', 'botright')
+
+
+Now we subset the data. For our purpose, lets include 
+
+a. columns : name, landmass, population, language, religion, animate, text 
+b. rows    : filter landmass for N.America, S.America, Africa and Asia only.
+
+The first transformation we apply is to select only the required columns: name, landmass, population, language, religion, animate, text.
+
+```{r}
+
+flagsdata_1 <- flagsdata[ , c('name', 'landmass', 'population', 'language', 'religion', 'animate', 'text')]
+
+```
+
+Next we filter the data for only the required rows for habitat - N.America, S.America, Africa and Asia.
+
+```{r}
+
+flagsdata_1 <- flagsdata_1[flagsdata_1$`landmass`%in% c('N.America', 'S.America', 'Africa', 'Asia'), ]
+
+```
+
+Lets see the effect of this subsetting:
+
+```{r, echo=FALSE}
+
+sprintf('Rows before subsetting %s', nrow(flagsdata) )
+sprintf('Rows after subsetting %s', nrow(flagsdata_1) )
+
+sprintf('Columns before subsetting %s', ncol(flagsdata) )
+sprintf('Columns after subsetting %s', ncol(flagsdata_1) )
+
