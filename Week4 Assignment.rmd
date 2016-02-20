@@ -1,0 +1,107 @@
+---
+title: "Week4Assignment"
+author: "Kishore Prasad"
+date: "February 20, 2016"
+output: html_document
+---
+
+3. Copy the introductory example. The vector name stores the extracted names.
+
+R> name
+
+[1] "Moe Szyslak" "Burns, C. Montgomery" "Rev. Timothy Lovejoy"
+[4] "Ned Flanders" "Simpson, Homer" "Dr. Julius Hibbert"
+
+```{r}
+library(stringr)
+raw.data <- "555-1239Moe Szyslak(636) 555-0113Burns, C. Montgomery555-6542Rev. Timothy Lovejoy555 8904Ned Flanders636-555-3226Simpson,Homer5553642Dr. Julius Hibbert"
+
+Character_names <- unlist(str_extract_all(raw.data, "[[:alpha:]., ]{2,}"))
+Character_phones <- unlist(str_extract_all(raw.data, "\\(?(\\d{3})?\\)?(-| )?\\d{3}(-| )?\\d{4}"))
+
+```
+
+(a) Use the tools of this chapter to rearrange the vector so that all elements conform to the standard first_name last_name.
+
+```{r}
+for (idx in 1:(length(Character_names))){
+    if(str_detect(Character_names[idx], ",") == TRUE) {
+        names_split=unlist(str_split(Character_names[idx], ","))
+        Character_names[idx]=str_c(names_split[2], " ", names_split[1])
+    }
+}
+
+Character_names
+```
+
+
+(b) Construct a logical vector indicating whether a character has a title (i.e., Rev. and Dr.).
+
+```{r}
+
+contains_title = str_detect(Character_names, "Rev.|Dr.")
+
+contains_title
+```
+
+
+(c) Construct a logical vector indicating whether a character has a second name.
+
+```{r}
+contains_second_name <- str_count(unlist(str_extract_all(Character_names, "[^Rev\\. |Dr\\. ].+")), " ") > 1
+
+contains_second_name
+
+```
+
+
+7.Consider the string <title>+++BREAKING NEWS+++</title>. We would like to
+extract the first HTML tag. To do so we write the regular expression <.+>. Explain why
+this fails and correct the expression.
+
+**The above regex fails because R applies greedy quantification. This means that the program tries to extract the greatest possible sequence of the preceding character. As the . matches any character, the function returns the greatest possible sequence of any characters before a sequence of sentence. We can change this behavior by adding a ? to the expression in order to signal that we are only looking for the shortest possible sequence of any characters before ">"**
+
+```{r}
+
+str_test <- "<title>+++BREAKING NEWS+++</title>"
+str_extract(str_test,"<.+?>")
+
+```
+
+
+8. Consider the string (5-3)^2=5^2-2*5*3+3^2 conforms to the binomial
+theorem. We would like to extract the formula in the string. To do so we write the
+regular expression [^0-9=+*()]+. Explain why this fails and correct the expression.
+
+**The above RegEx fails as "^" is interpreted as "not" in the character class. To fix this we use the below**
+
+```{r}
+
+str_test <- "(5-3)^2=5^2-2*5*3+3^2"
+
+# Original RegEx
+
+str_extract_all(str_test,"[^0-9=+*()]+")
+
+# Revised RegEx to escape the ^. But still misses the "-"
+str_extract_all(str_test,"[\\^0-9=+*()]+")
+
+# Final RegEx to include the "-" and output the entire string without any issues.    
+str_extract_all(str_test,"[\\^0-9-=+*()]+")
+
+```
+
+9.
+
+```{r}
+
+str_test <- "clcopCow1zmstc0d87wnkig7OvdicpNuggvhryn92Gjuwczi8hqrfpRxs5Aj5dwpn0TanwoUwisdij7Lj8kpf03AT5Idr3coc0bt7yczjatOaootj55t3Nj3ne6c4Sfek.r1w1YwwojigOd6vrfUrbz2.2bkAnbhzgv4R9i05zEcrop.wAgnb.SqoU65fPa1otfb7wEm24k6t3sR9zqe5fy89n6Nd5t9kc4fE905gmc4Rgxo5nhDk!gr"
+
+str_extract_all(str_test, "[A-Z]")
+
+```
+
+
+
+
+
