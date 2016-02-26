@@ -1,0 +1,94 @@
+---
+title: "CUNY-DAM-Project1"
+author: "Kishore Prasad"
+date: "February 25, 2016"
+output: html_document
+---
+
+First we get the raw data from the Github as lines. While doing this, we also split the file as a fixed-width record reading 3 rows per record .
+
+```{r warning=FALSE}
+library(RCurl)
+library(stringr)
+
+# The list below gives the width of each column in the fixed file. Each vector defines the layout per row of the data record. For convenience, we consider the lines containing "----" also as a column of the record.
+
+# So the below defines a record spanning 3 rows with the column widths for each row as defined by the vectors in the list.
+
+ColumnWidths <- list(c(7, 34, 6, 6,6,6,6,6,6,6), c(7, 34, 6, 6,6,6,6,6,6,6), 89)
+
+# We now read the file from github and store the records. 
+rawdatafile <- read.fwf('https://raw.githubusercontent.com/kishkp/CUNY-DAM/master/tournamentinfo.txt',
+                        widths = ColumnWidths, 
+                        skip = 4, 
+                        stringsAsFactors=FALSE) 
+```
+
+Next we retain only those columns that we need for further processing: 
+
+Player' Row Number=V1
+Player's Name = V2
+Player's State=V11
+Total Number of Points=V3
+Player's Pre-Rating=V12
+To calculate Average Pre Chess Rating of Opponents we need to find who the opponents were and to do this we use columns from V4 - V10 which store the opponent's row numbers
+
+```{r}
+rawdatafile<-rawdatafile[,c("V1", "V2", "V11", "V3", "V12", "V4", "V5", "V6", "V7", "V8", "V9", "V10")]
+
+```
+
+We now clean up each column as per the requirement and store in an intermediate data frame
+
+```{r}
+
+# Get the Player Row Numbers
+intermediate_df<-data.frame("Player_Num"= as.numeric(str_extract_all(rawdatafile[,"V1"],"[0-9]+"))) 
+
+# Get the Player Names
+intermediate_df<-cbind(intermediate_df, "Player_Name"=str_trim( unlist(str_extract_all(rawdatafile[,"V2"], "[^|]+"))))
+
+# Get the Players State 
+intermediate_df<-cbind(intermediate_df, "Player_State"= str_trim( unlist(str_extract_all(rawdatafile[,"V11"], "[^|]+"))))
+
+# Get the total number of points
+intermediate_df<-cbind(intermediate_df, "Player_Total_Points"=as.numeric(str_extract_all(rawdatafile[,"V3"], "[0-9\\.]+")))
+
+# Get Players Prerating
+
+intermediate_df<-cbind(intermediate_df, "Player_PreRate"=as.numeric(str_extract_all(str_extract_all(rawdatafile[,"V12"], "R: +[0-9]+"), "[0-9]+")))
+
+# Get Opponent1 pre Rate
+intermediate_df<-cbind(intermediate_df, "Opp1_PreRate"=intermediate_df[ as.numeric(str_extract_all(rawdatafile[,"V4"], "[0-9]+")),5])
+
+# Get Opponent2 pre Rate
+intermediate_df<-cbind(intermediate_df, "Opp2_PreRate"=intermediate_df[ as.numeric(str_extract_all(rawdatafile[,"V5"], "[0-9]+")),5])
+
+# Get Opponent3 pre Rate
+intermediate_df<-cbind(intermediate_df, "Opp3_PreRate"=intermediate_df[ as.numeric(str_extract_all(rawdatafile[,"V6"], "[0-9]+")),5])
+
+# Get Opponent4 pre Rate
+intermediate_df<-cbind(intermediate_df, "Opp4_PreRate"=intermediate_df[ as.numeric(str_extract_all(rawdatafile[,"V7"], "[0-9]+")),5])
+
+# Get Opponent5 pre Rate
+intermediate_df<-cbind(intermediate_df, "Opp5_PreRate"=intermediate_df[ as.numeric(str_extract_all(rawdatafile[,"V8"], "[0-9]+")),5])
+
+# Get Opponent6 pre Rate
+intermediate_df<-cbind(intermediate_df, "Opp6_PreRate"=intermediate_df[ as.numeric(str_extract_all(rawdatafile[,"V9"], "[0-9]+")),5])
+
+# Get Opponent7 pre Rate
+intermediate_df<-cbind(intermediate_df, "Opp7_PreRate"=intermediate_df[ as.numeric(str_extract_all(rawdatafile[,"V10"], "[0-9]+")),5])
+
+# Calculate the Mean Pre-rate of the Opponents
+intermediate_df<-cbind(intermediate_df, "Player_Avg_Opp_PreRate"=round(rowMeans(intermediate_df[, c(6:12)], na.rm=TRUE),0))
+
+```
+
+Now we generate the final dataset with the required columns
+
+```{r}
+
+final_ds <- intermediate_df[,c(2:5, 13)]
+
+final_ds
+```
