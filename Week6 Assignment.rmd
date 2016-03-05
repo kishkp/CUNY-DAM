@@ -1,0 +1,86 @@
+---
+title: "CUNY - DAM - Week 6 Assignment"
+author: "Kishore Prasad"
+date: "March 5, 2016"
+output: html_document
+---
+
+Read the raw data file from github.
+
+```{r}
+library(RCurl)
+library(tidyr)
+library(dplyr)
+library(stringr)
+
+flt_data<-read.csv("https://raw.githubusercontent.com/kishkp/CUNY-DAM/master/AirlineStatus.csv", stringsAsFactors = FALSE, check.names = FALSE, na.strings = c("", "NA"))
+```
+
+
+We now start the task of tidying up the data.
+
+The first task is to make Airline value repeat in the following rows. That is, we fill in values for the airline.
+
+```{r}
+
+flt_data <- fill(flt_data, Airline)
+
+```
+
+Next we remove all blank rows. To do this we check the Status column and remove all NA rows.
+
+```{r}
+
+flt_data <- filter(flt_data, !is.na(Status))
+```
+
+We now need to have the all the cities in its own column called "Cities"
+
+```{r}
+
+flt_data <- gather(flt_data, cities, flights, -c(1, 2), na.rm = TRUE)
+
+```
+
+The final transformation is to split status and have a column each for "delayed" and "ontime". Before we do that we want to remove all space between the words "on" and "time" and then proceed with the column split.
+
+```{r}
+
+flt_data[,2] <- unlist(str_replace_all(flt_data[,2], " ", ""))
+
+flt_data <- spread(flt_data, key = Status, value= flights )
+
+```
+
+Now we are ready for analysis.
+
+Lets calculate the ratio of delayed to ontime.
+
+```{r}
+
+flt_data <- mutate(flt_data, del_ot_ratio= delayed / ontime)
+
+```
+
+Using this ratio, we now calculate the average ratio to compare between the 2 airlines.
+
+```{r}
+
+flt_data %>% group_by(Airline) %>% summarise(mean(del_ot_ratio))
+
+```
+
+We find that Alaska has a better delayed to ontime ratio than Am West.
+
+Next we find the standard deviation for the 2 airlines.
+
+```{r}
+
+flt_data %>% group_by(Airline) %>% summarise(sd(ontime))
+
+```
+
+Here we find that Alaska has less standard deviation than Am West. 
+
+**After analysis, we can conclude that Alaska has a better performance record than Am west.**
+
