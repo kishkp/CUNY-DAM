@@ -1,0 +1,111 @@
+---
+title: "Project 2 - MLB Analysis"
+author: "Kishore Prasad"
+date: "March 8, 2016"
+output: 
+    html_document: 
+        toc: true
+---
+
+This Analysis is part of Project 2. In this project, we will analyze the Mobile App Download.
+
+## 1. Data Extraction
+
+Again here the data is fairly structured. Based on the requisite analysis, we may have to rearrange the data to arrive at the analysis. However, we will initially restructure the data to have the following format: AppName, Type, Paid_Free, Store, Release_Date, year, Downloads  
+
+Lets get started....
+
+```{r message=FALSE }
+
+library(RCurl)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(sqldf)
+
+# Read the data from github and skip the first 2 lines.  
+MobApp_raw<-read.csv("https://raw.githubusercontent.com/kishkp/CUNY-DAM/master/MobileAppDownload.csv", stringsAsFactors = FALSE, check.names = FALSE, na.strings = c("", "NA"), header = TRUE, skip = 2)
+
+# Extract the columns for Apple
+
+df1<-cbind(MobApp_raw[, c(1:10)], Store="Apple")
+
+# Extract the columns for Google
+
+df2<-cbind(MobApp_raw[, c(1:3, 11:17)], Store="Google")
+
+# combine both these data sets
+
+MobApp_raw <- rbind(df1, df2)
+
+# Convert the data from "Wide" to "Long" format. 
+
+MobApp_raw <-gather(MobApp_raw, Yr, Dnl, c(5:10) ,convert = TRUE, na.rm = TRUE )
+
+# Rename some columns to remove spaces and special characters
+
+colnames(MobApp_raw) [c(1,3,4)] <- c("AppName", "PaidFree", "ReleaseDate")
+
+# separate(MobApp_raw, ReleaseDate, c("m", "d", "y"), remove=FALSE)
+
+head(MobApp_raw)
+
+```
+
+## 2. Free app with most downloads per year
+
+To do this analysis, we filter only for Free apps. Grouping this data by year and selecting the app maximum download will be our analysis. 
+
+Below is the analysis
+
+```{r message=FALSE }
+
+free_max <- filter(MobApp_raw, PaidFree=="Free")
+
+# select the App that has the max download per year
+free_max_per_year<- sqldf("Select a.* from free_max as a where a.Dnl in (select max(b.Dnl) as Dnl from free_max as b group by b.Yr having b.Yr=a.Yr)")
+
+# The max downloads per year is as follows:
+free_max_per_year
+```
+
+## 3. Paid app with most downloads per year
+
+To do this analysis, we filter only for Paid apps. Grouping this data by year and selecting the app maximum download will be our analysis. 
+
+Below is the analysis
+
+```{r message=FALSE }
+
+paid_max <- filter(MobApp_raw, PaidFree=="Paid")
+
+# select the App that has the max download per year
+paid_max_per_year<- sqldf("Select a.* from paid_max as a where a.Dnl in (select max(b.Dnl) as Dnl from paid_max as b group by b.Yr having b.Yr=a.Yr)")
+
+# The max downloads per year is as follows:
+paid_max_per_year
+```
+
+## 4. Average downloads for each app since the release date for each provider
+
+For this Analysis, we calculate the average downloads by app and store
+
+```{r message=FALSE }
+avg_store_app_dnl <- sqldf("Select Store, AppName, avg(Dnl) as Avg_Dnls from MobApp_raw group by Store, AppName")
+
+# The Avg downloads per Store / App is as follows:
+avg_store_app_dnl
+
+```
+
+## 5. Average downloads for each app since the release dates across providers
+
+For this Analysis, we calculate the average downloads by app
+
+```{r message=FALSE }
+avg_app_dnl <- sqldf("Select AppName, avg(Dnl) as Avg_Dnls from MobApp_raw group by AppName")
+
+# The Avg downloads per App is as follows:
+avg_app_dnl
+
+```

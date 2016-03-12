@@ -1,0 +1,232 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js">
+</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+  jQuery(".analysis").hide();
+  //toggle the componenet with class msg_body
+  jQuery(".heading").click(function()
+  {
+    jQuery(this).next(".analysis").slideToggle(500);
+  });
+});
+</script>
+
+<style type="text/css"> 
+body {
+	margin: 20px auto;
+	font: 12px Verdana,Arial, Helvetica, sans-serif;
+}
+.layer1 {
+margin: 0;
+padding: 0;
+width: 850px;
+}
+ 
+.heading {
+margin: 1px;
+color: #fff;
+padding: 3px 10px;
+cursor: pointer;
+position: relative;
+background-color:#c30;
+}
+.analysis {
+padding: 5px 10px;
+background-color:#fafafa;
+}
+p { padding: 5px 0; }
+</style> 
+
+
+---
+title: "Project 2 - MLB Analysis"
+author: "Kishore Prasad"
+date: "March 8, 2016"
+output: html_document
+---
+
+This Analysis is part of Project 2. In this project, we will analyze the MLB data. 
+
+Note: I have used collapsible sections for each section of the project as below. The below sections are expandable / collapsible. Just click on the section headers 
+**courtesy: http://designgala.com/how-to-expand-collapse-toggle-div-layer-using-jquery/**
+
+<div class="layer1">
+<p class="heading">1 Data Extraction </p>
+<div class="analysis">
+The data is a mix between csv and fixed format. The below is the format as well as challenges with the data:
+
+1. The Header is repeated multiple times in the data file (I have copied from the website directly as is into notepad) along with blank lines in between.
+
+2. The Year is the first field consisting of the first 4 characters.
+
+3. The next piece of data is after the year field. This is from 5th character till the last number in the following string. This piece of data consists of 2 team / city names and the respective games won in the series seperated by a comma. Thus we get 4 data points - team1_name, team1_gameswon, team2_name, team2_gameswon
+
+4. The last piece of data is the MVP for the series.
+
+Lets get started....
+
+```{r message=FALSE }
+
+library(RCurl)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(stringi)
+
+```
+
+```{r message=FALSE }
+# Read the data from github. This gives us 2 splits / columns in the data 
+
+MLB_raw<-read.csv("https://raw.githubusercontent.com/kishkp/CUNY-DAM/master/MLB.csv", stringsAsFactors = FALSE, check.names = FALSE, na.strings = c("", "NA"), header = FALSE)
+
+# Delete all rows where V2 is NA. This removes all the "Year results MVP" header rows as well as blank rows. It also removes the record for 1904 where the series was not held. 
+
+MLB_raw <- filter(MLB_raw, !is.na(V2))
+
+# Lets now extract the year field from V1
+
+MLB_raw <- mutate(MLB_raw, Year = unlist(str_extract(V1, "[0-9]+"))  )
+
+# Next we extract team1_name
+
+MLB_raw <- mutate(MLB_raw, team1_name = unlist(str_trim(str_extract(V1, "[[:alpha:].' ]+")))  )
+
+# Next we extract team1_score. For this we extract the last occurance of a number sequence
+
+MLB_raw <- mutate(MLB_raw, team1_gameswon = as.numeric(unlist(stri_extract_last(V1, regex = "[0-9]+")) ) )
+
+# Next we extract team2_name from V2
+
+MLB_raw <- mutate(MLB_raw, team2_name = unlist(str_trim(str_extract(V2, "[[:alpha:].' ]+")))  )
+
+# Next we extract team2_score. For this we extract the number  
+
+MLB_raw <- mutate(MLB_raw, team2_gameswon = as.numeric(unlist(str_extract(V2, "[0-9]+")) ) )
+
+# Next we extract the MVP. This is the last alpha sequence in V2
+
+MLB_raw <- mutate(MLB_raw, MVP = unlist(str_trim(stri_extract_last(MLB_raw$V2, regex = "[a-zA-Z-.' ]+"))))
+
+# Finally we remove V1 and V2 from the dataset.
+
+MLB_raw <- MLB_raw[, c(3:8)]
+```
+
+</div>
+<p class="heading">2 Teams with most and least appearances </p>
+<div class="analysis">
+
+Now we will do the following analysis:
+
+Team with the most and least appearances 
+
+Note: We are assuming that we choose from only the team1 and team2 columns. since we dont have the data for all participating teams in each series. Also, appearances in this analysis is whether a team participated in the series and not how many games they played in the series. 
+
+```{r message=FALSE }
+
+# get team counts from team1_name
+team1_count <- MLB_raw %>% group_by(team_name=team1_name) %>% summarise(cnt=n())
+
+# get team counts from team2_name
+team2_count <- MLB_raw %>% group_by(team_name=team2_name) %>% summarise(cnt=n())
+
+# merge both data frames
+team_names <- rbind(team1_count,team2_count)
+
+#now get the sum of the counts
+team_counts<-team_names %>% group_by(team_name) %>% summarise(team_count=sum(cnt))
+
+# Now we determine the team with the maximum appearances
+max_app<- filter(team_counts, team_count==max(team_count))
+
+# Similarly we determine the team with the minimum  appearances
+min_app<- filter(team_counts, team_count==min(team_count))
+
+```
+
+**Teams with most appearances are:**
+```{r message=FALSE }
+max_app
+```
+
+
+**Teams with least appearances are:**
+```{r message=FALSE }
+min_app
+```
+</div>
+<p class="heading">3 Team with the most and least wins considering all series data </p>
+<div class="analysis">
+
+Similar to the previous analysis, we now use the team1_gameswon and team2_gameswon to get the team with the most and least wins. 
+
+```{r message=FALSE }
+
+# get team wins from team1 column
+team1_won <- MLB_raw %>% group_by(team_name=team1_name) %>% summarise(wins=sum(team1_gameswon))
+
+# get team wins from team2 column
+team2_won <- MLB_raw %>% group_by(team_name=team2_name) %>% summarise(wins=sum(team2_gameswon))
+
+# merge both data frames
+team_wins <- rbind(team1_won,team2_won)
+
+#now get the sum of the wins
+team_win_sums<-team_wins %>% group_by(team_name) %>% summarise(wins=sum(wins))
+
+# Now we determine the team with the maximum wins
+max_wins<- filter(team_win_sums, wins==max(wins))
+
+# Similarly we determine the team with the minimum wins
+min_wins<- filter(team_win_sums, wins==min(wins))
+
+```
+
+**Teams with most wins are:**
+```{r message=FALSE }
+max_wins
+```
+
+
+**Teams with least wins are:**
+```{r message=FALSE }
+min_wins
+```
+</div>
+<p class="heading">4 Team with the highest ratio of wins to appearances </p>
+<div class="analysis">
+
+To get the ratio of wins to appearances, we join the 2 final datasets from the previous analyses.
+
+```{r message=FALSE }
+
+# We join team_counts and team_win_sums
+team_data<- full_join(team_counts, team_win_sums, by="team_name")
+
+# calculate the ratio
+
+team_data <- mutate(team_data, win_app_ratio= wins / team_count)
+
+# Now we determine the team with the maximum ratio
+max_ratio<- filter(team_data, win_app_ratio==max(win_app_ratio))
+
+# Similarly we determine the team with the minimum ratio
+min_ratio<- filter(team_data, win_app_ratio==min(win_app_ratio))
+
+```
+
+**Teams with max ratio are:**
+```{r message=FALSE }
+max_ratio
+```
+
+
+**Teams with least ratio are:**
+```{r message=FALSE }
+min_ratio
+```
+
+</div>
+</div>

@@ -1,0 +1,136 @@
+---
+title: "Project 2 - MLB Analysis"
+author: "Kishore Prasad"
+date: "March 8, 2016"
+output: 
+    html_document: 
+        toc: true
+---
+
+This Analysis is part of Project 2. In this project, we will analyze the auction data for unforced capacity of generators in the NYS electricity market.
+
+## 1. Data Extraction
+
+The data is fairly structured. Based on the requisite analysis, we may have to rearrange the data to arrive at the analysis. However, we will initially restructure the data to have the following format: Month, Year, AuctionType, City, Price.  
+
+Lets get started....
+
+```{r message=FALSE }
+
+library(RCurl)
+library(tidyr)
+library(dplyr)
+library(stringr)
+library(sqldf)
+
+# Read the data from githu and skip the first 2 lines for the header. We will be assigining the header separately.  
+
+UCAP_raw<-read.csv("https://raw.githubusercontent.com/kishkp/CUNY-DAM/master/UCAP.csv", stringsAsFactors = FALSE, check.names = FALSE, na.strings = c("", "NA"), header = FALSE, skip = 2)
+
+# Assign headers
+
+names(UCAP_raw) <- c("Mn_Yr", "Monthly_NYC",	"Monthly_LHV", "Monthly_LI", "Monthly_ROS", "Spot_NYC",	"Spot_LHV",	"Spot_LI", "Spot_ROS",	"Strip_NYC", "Strip_LHV", "Strip_LI",	"Strip_ROS")
+
+# Convert the data from "Wide" to "Long" format. 
+
+UCAP_raw<-gather(UCAP_raw, type_city, Price,  -Mn_Yr)
+
+# Now split the Mn_Yr to Month and Year
+
+UCAP_raw <- separate(UCAP_raw, Mn_Yr, c("Mn", "Yr"), remove = TRUE) 
+
+# Next split the Type and City Column
+
+UCAP_raw <- separate(UCAP_raw, type_city, c("AuctionType", "City"), remove = TRUE, sep="_") 
+
+# Next we convert the Prices into numeric after removing the "$"
+
+UCAP_raw[,5]<- as.numeric(str_trim(str_extract(UCAP_raw[ ,5], "[0-9].+")))
+
+# Finally we exclude all the Price with NAs
+
+# UCAP_raw <- na.exclude(UCAP_raw)
+
+head(UCAP_raw)
+
+```
+
+## 2. Which month of the year sees the highest prices in each location?
+
+To do this analysis, we will calculate the average prices for each city by month and then select the month that has the max price per city. 
+
+Below is the analysis
+
+```{r message=FALSE }
+
+# Calculate the average prices for each city by month
+price_mean<- sqldf("Select Mn, City, avg(Price) as Price from UCAP_raw group by Mn, City order by city, Mn")
+
+# select the month that has the max price per city
+price_max<- sqldf("Select a.* from price_mean as a where a.Price in (select max(b.Price) as Price from price_mean as b group by b.City having b.City=a.City)")
+
+# The costliest month for each city is as follows:
+price_max
+```
+
+## 3. What is the average difference between NYC and ROS prices?
+
+To do this analysis, the best format is a "wide"" format where the cities are along the columns.
+
+Below is the analysis:
+
+```{r message=FALSE }
+
+# we reformat the data to have cities in columns
+
+UCAP_cities <- UCAP_raw %>% spread(City, Price, convert = TRUE)
+
+# We now calculate the difference between NYC and ROS prices.
+
+UCAP_cities <- UCAP_cities %>% select(NYC, ROS) %>% mutate(price_diff = NYC - ROS)
+
+# Finally we calculate the average of the price_diff column
+
+summarise(UCAP_cities, Diff = mean(UCAP_cities$price_diff, na.rm=TRUE))
+
+```
+
+## 4. Which calendar year saw the highest average price across regions (ignoring weighting)?
+
+For this Analysis, we calculate the average prices for each year and then find the year that has the maximum average
+
+```{r message=FALSE }
+# Calculate the average prices for each year
+price_mean<- sqldf("Select Yr, avg(Price) as Price from UCAP_raw group by Yr order by Yr")
+
+# select the Year that has the max price
+price_max <- sqldf("Select Yr, max(Price) from price_mean")
+
+# The Year with the highest average price was:
+price_max
+```
+
+## 5. Is the monthly auction or the spot auction more volatile (i.e. which has the most variability in pricing)?
+
+To do this analysis, the best format is a "wide"" format where the Auction Types are along the columns.
+
+Below is the analysis:
+
+```{r message=FALSE }
+
+# we reformat the data to have Auction Type in columns
+
+UCAP_AucType <- UCAP_raw %>% spread(AuctionType, Price, convert = TRUE)
+
+# We now retain only the Monthly and Spot Auction columns
+
+UCAP_AucType <- UCAP_AucType %>% select(Monthly, Spot) %>% filter(!is.na(Monthly)) %>% filter(!is.na(Spot))  
+
+
+# Finally we calculate the variance for each of the 2 columns
+summarise_each(UCAP_AucType, funs(var))
+
+
+```
+
+Based on the results, it seems that the Spot auction is more volatile than the Monthly auction.
