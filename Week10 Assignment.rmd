@@ -1,0 +1,46 @@
+---
+title: "Week10 Assignment"
+author: "Kishore Prasad"
+date: "April 1, 2016"
+output: html_document
+params:
+   API_key: b56a18c8cf8438d9f7310433030d37e4:18:74877465
+---
+
+In this assignment, we are going to extract data from movie reviews for all movies containing specific key words. We will then create a data frame having all the columns.
+
+The NYT API returns only 20 results at a time. Hence to extract all the movies, we set up a loop that keeps calling the API with the requisite 'offset' till we reach the end of the data. 
+
+```{r}
+library(XML)
+library(RCurl)
+library(jsonlite)
+library(plyr)
+
+search_term <- "vampire"
+more_data <- TRUE
+next_offset <- 0
+NYT_Final_df <- data.frame()
+
+
+while(more_data==TRUE){
+    # API URL for NYT Movie reviews
+    API_url <- paste0("http://api.nytimes.com/svc/movies/v2/reviews/search.json?query=" , search_term, "&api-key=", params$API_key, "&offset=", next_offset)        
+
+    # parse json data.
+    json_data <- fromJSON(API_url, flatten = TRUE)
+    
+    # Add rows to the final data frame 
+    NYT_Final_df <- rbind.fill(NYT_Final_df, json_data$results)
+
+    if(json_data$num_results < 20) { 
+        more_data<-FALSE
+    }
+    else {
+        next_offset = next_offset + 20
+    }
+} 
+
+head(NYT_Final_df)
+summary(NYT_Final_df)
+```
