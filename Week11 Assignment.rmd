@@ -1,0 +1,154 @@
+---
+title: "Week 11 Assignment"
+author: "Kishore Prasad"
+date: "April 10, 2016"
+output: 
+    html_document: 
+        toc: true
+---
+
+The purpose of this assignment is to classify given emails as spam or ham. We will use the following corpus:  https://spamassassin.apache.org/publiccorpus/. 
+
+Assumption: It is assumed that the spam and easy_ham folders contain the downloaded emails and are stored in the "emails" folder in the working directory. It is also assumed that the cmds file has been deleted from the folders. 
+
+Lets get started....
+
+
+## 1. Create the email corpus from Spam and Ham folders
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+library(RCurl)
+library(XML)
+library(stringr)
+library(tm)
+library(SnowballC)
+library(RTextTools)
+
+# first we parse all the spams and create the email corpus
+spams <- dir("./emails/spam/", full.names = TRUE)
+tmp <- readLines(spams[1])
+tmp <- htmlParse(tmp[seq(which(tmp == "")[1] + 1, length(tmp), 1)])
+spam_mail <- xpathSApply(tmp, "//text()[not(ancestor::script)] [not(ancestor::style)] [not(ancestor::noscript)] [not(ancestor::form)]", xmlValue)
+spam_corpus <- Corpus(VectorSource(spam_mail))
+meta(spam_corpus[[1]], "EmailType") <- "Spam"
+
+n <- 1
+for(i in 2:length(spams)){
+    tmp <- readLines(spams[i])
+    tmp <- htmlParse(tmp[seq(which(tmp == "")[1] + 1, length(tmp), 1)])
+    spam_mail <- xpathSApply(tmp, "//text()[not(ancestor::script)] [not(ancestor::style)] [not(ancestor::noscript)] [not(ancestor::form)]", xmlValue)
+    if (length(spam_mail)!=0) {
+        n <- n + 1
+        tmp_corpus <- Corpus(VectorSource(spam_mail))
+        spam_corpus <- c(spam_corpus, tmp_corpus)
+        meta(spam_corpus[[n]], "EmailType") <- "Spam"
+    }
+}
+
+meta_spam <- meta(spam_corpus, type = "local", tag = "EmailType")
+
+# next we parse all the hams and add to the email corpus
+hams <- dir("./emails/easy_ham/", full.names = TRUE)
+tmp <- readLines(hams[1])
+tmp <- htmlParse(tmp[seq(which(tmp == "")[1] + 1, length(tmp), 1)])
+
+ham_mail <- xpathSApply(tmp, "//text()[not(ancestor::script)] [not(ancestor::style)] [not(ancestor::noscript)] [not(ancestor::form)]", xmlValue)
+ham_corpus <- Corpus(VectorSource(ham_mail))
+meta(ham_corpus[[1]], "EmailType") <- "Ham"
+
+n <- 1
+for(i in 2:length(hams)){
+    tmp <- readLines(hams[i])
+    tmp <- htmlParse(tmp[seq(which(tmp == "")[1] + 1, length(tmp), 1)])
+
+    ham_mail <- xpathSApply(tmp, "//text()[not(ancestor::script)] [not(ancestor::style)] [not(ancestor::noscript)] [not(ancestor::form)]", xmlValue)
+    
+    if (length(ham_mail)!=0) {
+        n <- n + 1
+        tmp_corpus <- Corpus(VectorSource(ham_mail))
+        ham_corpus <- c(ham_corpus, tmp_corpus)
+        meta(ham_corpus[[n]], "EmailType") <- "Ham"
+    }
+}
+
+# We combine both the corpus
+
+meta_ham <- meta(ham_corpus, type = "local", tag = "EmailType")
+email_corpus <- c(spam_corpus, ham_corpus)
+
+```
+
+
+## 2. Clean the email corpus
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+
+#randomize the rows
+
+email_corpus<- sample(email_corpus, length(email_corpus), length(email_corpus))
+meta_EmailType <- meta(email_corpus, type = "local", tag = "EmailType")
+
+meta_data <- data.frame(
+    EmailType = unlist(meta_EmailType)
+)
+
+# remove Stopwords
+
+#email_corpus <- tm_map(email_corpus, str_replace_all, pattern = "[[:punct:]]", replacement = " ")
+
+email_corpus <- tm_map(email_corpus, removeWords, words = stopwords("en"))
+#email_corpus <- tm_map(email_corpus, tolower)
+
+email_corpus <- tm_map(email_corpus, stemDocument)
+#email_corpus <- tm_map(email_corpus, PlainTextDocument)
+
+tdm <- TermDocumentMatrix(email_corpus)
+tdm <- removeSparseTerms(tdm, 1-(10/length(email_corpus)))
+
+dtm <- DocumentTermMatrix(email_corpus)
+dtm <- removeSparseTerms(dtm, 1-(10/length(email_corpus)))
+
+```
+
+## 3. Create Train and Test datasets 
+```{r warning=FALSE, message=FALSE, error=FALSE}
+
+EmailType_labels <- unlist(meta(email_corpus, "EmailType"))
+
+N <- length(EmailType_labels)
+Three_4th <- round(N*0.75,0)
+
+container <- create_container(dtm, labels = EmailType_labels, trainSize = 1:Three_4th, testSize = Three_4th+1:N, virgin = TRUE)
+
+```
+
+
+## 4. We will now apply the random forest classifier to this dataset
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+tree_model <- train_model(container, "TREE")
+
+tree_out <- classify_model(container, tree_model)
+
+labels_out <- data.frame(
+    correct_label = EmailType_labels[Three_4th+1:N],
+    tree = as.character(tree_out[,1]),
+    stringsAsFactors = F)
+
+
+```
+
+## 5. Evaluate models
+
+```{r warning=FALSE, message=FALSE, error=FALSE}
+
+table(labels_out[,1] == labels_out[,2])
+
+prop.table(table(labels_out[,1] == labels_out[,2]))
+
+```
+
+We can see that we are able to classify `r round(prop.table(table(labels_out[,1] == labels_out[,2]))[2], 2)` of the dataset correctly using the Random Forest classifier.
+\
+\
+
