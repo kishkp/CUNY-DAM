@@ -1,0 +1,77 @@
+---
+title: "Moving data from MySQL to Neo4j"
+author: "Kishore Prasad"
+date: "April 20, 2016"
+output: html_document
+---
+
+
+In this Project, we will extract some data from the  MySQL database - flights and create a Neo4j database. We will use the following tables from flights:
+
+Airlines
+Airports
+Flights (a sample of 10,000 rows)
+planes
+
+It is assumed that you have MySQL 
+
+Here are the various node types we will create:
+
+Airline
+Orig
+Dest
+Flight
+Plane
+AircraftType
+
+The below are the relations that we will create
+
+Flight OWNED_BY Airline
+Flight FLEW_FROM Orig
+Flight FLEW_TO Dest
+Flight BY_PLANE Plane
+Plane OF_TyPE AircraftType
+
+
+```{r}
+library(RMySQL)
+library(RNeo4j)
+
+```
+
+# Get data from MySQL
+
+In this section we connect to MySQL and create data frames from all the tables in the database.
+
+```{r}
+mydb = dbConnect(MySQL(), user='root', password='root', dbname='flights', host='localhost')
+
+airlines = dbGetQuery(conn = mydb, statement = "Select * from airlines")
+planes = dbGetQuery(conn = mydb, statement = "Select * from planes")
+aircraft_types =  dbGetQuery(conn = mydb, statement = "Select distinct model, manufacturer, type, engines, seats, speed from planes")
+
+airports = dbGetQuery(conn = mydb, statement = "Select * from airports")
+flights = dbGetQuery(conn = mydb, statement = "Select * from flights")
+```
+
+# Create data structure in Neo4j
+
+In this section we connect to Neo4j and create the structure for the flights database. 
+
+Note: In my installation, I am disabling authentication.
+
+```{r}
+
+graph = startGraph("http://localhost:7474/db/data/")
+clear(graph, input = FALSE)
+
+# create the nodes for Airlines
+for (i in 1:nrow(airlines)){
+    createNode(graph, "Airline", carrier = airlines[i,1], name = airlines[i,2])
+}
+addConstraint(graph, "Airline", "carrier")
+
+
+summary(graph)
+```
+
