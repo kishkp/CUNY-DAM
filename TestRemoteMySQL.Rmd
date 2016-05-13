@@ -1,0 +1,19 @@
+---
+title: "Untitled"
+author: "Kishore Prasad"
+date: "May 9, 2016"
+output: html_document
+---
+
+```{r}
+library(ggplot2)
+library(ibmdbR)
+library(RMySQL)
+mydb = dbConnect(RMySQL::MySQL(), user='ussSnnNteccfE', password='prhx3TuOi474J', dbname='d8409045929144bf79ca59940b6a4ff3e', host='159.8.128.101', port= 3307)
+
+
+airlines = dbGetQuery(conn = mydb, statement = "Select * from test")
+
+airlines
+
+```

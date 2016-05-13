@@ -151,4 +151,3 @@ prop.table(table(labels_out[,1] == labels_out[,2]))
 We can see that we are able to classify `r round(prop.table(table(labels_out[,1] == labels_out[,2]))[2], 2)` of the dataset correctly using the Random Forest classifier.
 \
 \
-

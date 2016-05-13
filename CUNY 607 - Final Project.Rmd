@@ -1,0 +1,104 @@
+---
+title: "CUNY 607 - Final Project"
+author: "Kishore Prasad"
+date: "May 8, 2016"
+output: html_document
+params:
+    API_key: b56a18c8cf8438d9f7310433030d37e4:18:74877465
+---
+
+    API_url <- paste0("http://api.nytimes.com/svc/movies/v2/reviews/search.json?query=" , search_term, "&api-key=", params$API_key, "&offset=", next_offset)        
+
+
+Introduction
+
+The Indian equity market is currently in good stead and is gaining steam. It is poised to give a return of 10- 20 percent in 2016 depending on which brokerage firm you speak to. Given this background there has been a spurt in primary market activities in the first half of 2016. There have been some hits and some misses. The goal of this project is to study a limited pre-IPO data that is available for a company and determine if the IPO is going to be a success or a failure. 
+
+How do I determine success or failure?
+
+There are different opinions on what qualifies as a successful IPO. For the purpose of this project (and from a short term traders perspective), I would term an IPO as successful if I make 5% or more on listing day.
+
+And why 5%? - Based on the average listing day gains for the last 100 IPOs (considering only those IPOs that had listing day gains). We will see this in our analysis later.
+
+
+Methodology
+
+In this project, I would like to study IPOs from the 2007 to 2014. This becomes my training set. I apply various machine learning algorithms to this training set and use the model to forecast the success for IPOs in 2015 and 2016 that are held in the testing / validation.
+
+I finally conclude by providing a classification matrix for the various algorithms.
+
+Without much ado, lets dive right into the process. 
+
+
+Data that is used in the Analysis
+
+Stock market trend for SENSEX - Date, OHLC Data, 7 DMA, 15 DMA, 50 DMA, 100 DMA and 200 DMA
+
+IPO Rating - a rating scale from 1 - 5 if available
+
+IPO Over/Under Subscribed
+
+IPO Oversubscribed by how much
+
+Positive / Negative news regarding the IPO
+
+Any Review of the IPO before the listing
+
+
+
+
+
+
+Sourcing the data
+
+??? Project includes data from at least two different types of data sources (e.g., two or more of these: relational or CSV, Neo4J, web page [scraped or API], MongoDB, etc.)
+
+
+Data Transformations
+??? Project includes at least one data transformation operation. [Examples: transforming from wide to long; converting columns to date format]
+
+
+
+Exploratory Data Analysis
+
+??? Project includes at least one statistical analysis and at least one graphics that describes or validates your data.
+??? Project includes at least one graphic that supports your conclusion(s).
+??? Project includes at least one statistical analysis that supports your conclusion(s).
+
+
+
+??? Project includes at least one feature that we did not cover in class! There are many examples: "I used ggmap; I created a decision tree; I ranked the results; I created my presentation slides directly from R; I figured out to use OAuth 2.0."
+??? Presentation.
+
+
+Logistic Regression
+
+
+
+Random Forests
+
+
+Decision trees
+
+
+
+Conclusion
+
+
+Challenges encountered
+
+??? Presentation. Did you show (at least) one challenge you encountered in code and/or data, and what you did when you encountered that challenge? If you didn't encounter any challenges, your assignment was clearly too easy for you!
+
+
+
+Was the presentation delivered in the allotted time (3 to 5 minutes)?
+
+??? Presentation. Did the audience come away with a clear understanding of your motivation for undertaking the project?
+??? Presentation. Did the audience come away with a clear understanding of at least one insight you gained or conclusion you reached or hypothesis you "confirmed" (rejected or failed to reject.)?
+
+
+??? Code and data. Have you delivered the submitted code and data where it is self-contained-preferably in rpubs.com and github? Am I able to fully reproduce your results with what you've delivered? You won't receive full credit if your code references data on your local machine!
+
+??? Code and data. Does all of the delivered code run without errors?
+??? Code and data. Have you delivered your code and conclusions using a "reproducible research" tool such as RMarkdown?
+??? Deadline management. Were your draft project proposal, project, and presentation delivered on time? Any part of the project that is turned in late will receive a maximum grade of 80%. Please turn in your work on time! You are of course welcome to deliver ahead of schedule!

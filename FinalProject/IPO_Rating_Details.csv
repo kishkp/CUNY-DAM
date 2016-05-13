@@ -1,0 +1,387 @@
+"","IssuerCompany","OfficialRating","CapitalMarketRating","Subscribe","Avoid","Neutral"
+"2","Parag Milk Foods Ltd",1,7,4,0,1
+"3","Ujjivan Financial Services Ltd",1,9,6,0,0
+"4","Thyrocare Technologies Ltd",1,8,6,0,0
+"5","Equitas Holdings Limited",1,9,6,0,0
+"6","Infibeam Incorporation Ltd",1,1,0,0,0
+"7","Bharat Wire Ropes Ltd",1,1,0,0,0
+"8","Healthcare Global Enterprises Ltd",1,5,1,1,0
+"9","Quick Heal Technologies Ltd",1,8,1,0,0
+"10","TeamLease Services Ltd",3,3,0,0,0
+"11","Precision Camshafts Ltd",1,6,3,1,0
+"12","Narayana Hrudayalaya Ltd",1,5,3,0,0
+"13","Alkem Laboratories Limited",1,1,0,0,0
+"14","Dr. Lal PathLabs Limited",1,1,0,0,0
+"15","S H Kelkar & Company Ltd",1,9,2,0,0
+"16","Interglobe Aviation Ltd",1,5,2,0,0
+"17","Coffee Day Enterprises Ltd",1,5,3,4,1
+"18","Sadbhav Infrastructure Project Limited",1,1,0,0,0
+"19","Prabhat Dairy Limited",1,1,0,1,0
+"20","Shree Pushkar Chemicals and Fertilisers Ltd",1,1,1,0,0
+"21","Pennar Engineered Building Systems Ltd",1,4,0,0,0
+"23","Navkar Corporation Limited",1,11,7,1,0
+"24","Power Mech Projects Ltd",1,9,1,0,0
+"25","Syngene International Ltd",1,14,8,1,0
+"26","Manpasand Beverages Ltd",1,5,0,0,1
+"27","PNC Infratech Limited",1,9,1,2,0
+"28","UFO Moviez Ltd",1,6,5,0,0
+"29","MEP Infrastructure Developers Ltd",1,1,0,0,0
+"30","VRL Logistics Ltd",1,5,7,0,0
+"31","Inox Wind Limited",1,9,2,0,0
+"32","Adlabs Entertainment Ltd",1,5,4,2,0
+"33","Ortel Communications Ltd",1,10,1,2,0
+"34","NCML Industries Ltd",1,1,0,0,0
+"35","Monte Carlo Fashions Limited",1,6,6,1,0
+"36","Shemaroo Entertainment Ltd",1,12,5,1,0
+"37","Sharda Cropchem Ltd",4,9,2,0,0
+"38","Snowman Logistics Ltd",3,13,5,0,0
+"39","Wonderla Holidays Ltd",3,5,2,0,0
+"40","Loha Ispaat Ltd",1,3,0,0,0
+"41","Engineers India Limited",1,15,0,0,0
+"42","Power Grid Corporation of India",1,14,1,0,0
+"44","Just Dial Ltd",7,19,3,0,0
+"45","Scotts Garments Ltd",4,17,0,1,0
+"46","Repco Home Finance Ltd",4,1,1,0,0
+"47","Sai Silks (Kalamandir) Ltd",6,16,1,1,0
+"48","V-Mart Retail Ltd",4,17,1,0,0
+"49","Bharti Infratel Limited",3,9,5,1,0
+"50","PC Jeweller Ltd",4,7,3,1,0
+"51","Credit Analysis & Research Ltd",1,19,11,0,0
+"52","Tara Jewels Limited",4,18,1,1,0
+"53","VKS Projects Ltd",5,1,0,1,0
+"54","Speciality Restaurants Ltd",3,20,2,2,0
+"55","Plastene India Limited",4,3,0,1,0
+"56","Samvardhana Motherson Finance Ltd",3,1,0,0,0
+"57","Tribhovandas Bhimji Zaveri Ltd",4,5,0,0,0
+"58","MT Educare Limited",3,5,1,1,0
+"59","National Buildings Construction Corporation Ltd",3,19,6,0,0
+"60","Olympic Cards Ltd",5,1,0,0,0
+"61","Multi Commodity Exchange of India Ltd",7,21,7,0,0
+"62","Goodwill Hospital & Research Centre Ltd",4,18,0,1,0
+"63","Indo Thai Securities Limited",4,1,0,0,0
+"65","Flexituff International Ltd",4,18,1,1,0
+"66","Taksheel Solutions Ltd",6,3,0,0,0
+"67","Onelife Capital Advisors Ltd",5,1,0,0,0
+"68","M and B Switchgears Ltd",6,22,0,2,0
+"69","Tijaria Polypipes Ltd",6,23,0,1,0
+"70","Swajas Air Charters Ltd",6,1,0,1,0
+"71","RDB Rasayans Ltd",6,1,0,0,0
+"72","Prakash Constrowell Ltd",6,16,0,0,0
+"73","PG Electroplast Limited",4,16,0,1,0
+"74","TD Power Systems Ltd",3,5,4,3,0
+"75","SRS Limited",4,10,0,3,0
+"76","Brooks Laboratories Ltd",6,16,0,3,0
+"77","Tree House Education & Accessories Ltd",1,5,1,2,0
+"78","L&T Finance Holdings Limited",7,14,7,0,0
+"79","Inventure Growth & Securities Ltd",6,23,1,1,0
+"80","Bharatiya Global Infomedia Ltd",6,16,0,1,0
+"81","Readymade Steel India Ltd",6,1,0,1,0
+"82","Rushil Decor Ltd",6,1,0,1,0
+"83","Birla Pacific Medspa Ltd",6,10,0,2,0
+"84","VMS Industries Ltd",5,1,0,0,0
+"86","Timbor Home Limited",5,17,0,1,0
+"87","Galaxy Surfactants Ltd",3,5,2,0,0
+"88","Power Finance Corporation Ltd",1,21,6,0,0
+"89","Aanjaneya Lifecare Ltd",6,17,0,0,0
+"90","Sanghvi Forging & Engineering Ltd",4,1,0,1,0
+"91","Vaswani Industries Ltd",6,1,0,1,0
+"92","Servalakshmi Paper Ltd",6,1,0,2,0
+"93","Innoventive Industries Ltd",4,3,4,1,0
+"94","Future Ventures India Ltd",4,19,7,2,0
+"95","Paramount Printpackaging Ltd",6,22,0,1,0
+"96","Muthoot Finance Ltd",3,19,9,0,0
+"97","Shilpi Cable Technologies Ltd",5,1,0,1,0
+"98","PTC India Financial Services Ltd",3,20,5,1,0
+"99","Lovable Lingeries Ltd",4,5,6,1,1
+"100","Acropetal Technologies Ltd",4,3,0,0,0
+"101","Fineotex Chemical Ltd",6,1,0,1,0
+"102","Sudar Garments Ltd",5,16,0,1,0
+"103","Omkar Speciality Chemicals Ltd",4,3,0,1,0
+"104","Tata Steel Ltd",1,9,5,0,0
+"105","Midvalley Entertainment Ltd",5,22,0,2,0
+"107","C Mahendra Exports Ltd",6,3,0,1,0
+"108","Shekhawati Poly-Yarn Ltd",6,1,0,1,0
+"109","Punjab & Sind Bank",3,19,7,0,0
+"110","A2Z Maintenance & Engineering Services Ltd",3,3,1,2,0
+"111","Ravi Kumar Distilleries Ltd",6,16,0,1,0
+"112","Shipping Corporation of India Ltd",1,13,1,1,0
+"113","MOIL Limited",7,15,10,0,0
+"114","Claris Lifesciences Limited",4,9,5,0,0
+"115","RPP Infra Projects Ltd",6,1,0,1,0
+"116","Power Grid Corporation of India Ltd",1,14,4,0,0
+"117","Gravita India Ltd",4,1,1,0,0
+"118","Coal India Limited",7,14,7,0,0
+"119","Gyscoal Alloys Ltd",6,1,0,0,0
+"120","Prestige Estates Projects Ltd",4,10,0,0,0
+"121","BS Transcomm Ltd",6,10,0,0,0
+"122","Oberoi Realty Ltd",3,7,0,0,0
+"123","Commercial Engineers & Body Builders Co Ltd",6,10,1,0,0
+"124","Bedmutha Industries Ltd",6,10,0,0,0
+"125","Sea TV Network Ltd",5,22,0,0,0
+"126","Ashoka Buildcon Ltd",3,9,0,0,0
+"128","Tecpro Systems Ltd",3,12,0,0,0
+"129","VA Tech Wabag Ltd",3,13,1,0,0
+"130","Cantabil Retail India Ltd",6,7,1,0,0
+"131","Gallantt Ispat Ltd",1,1,0,1,0
+"132","Electrosteel Integrated Ltd",4,5,1,0,0
+"133","Orient Green Power Company Ltd",3,5,2,0,1
+"134","Ramky Infrastructure Ltd",4,19,3,0,0
+"135","Microsec Financial Services Ltd",6,3,0,1,0
+"136","Eros International Media Ltd",3,13,3,0,0
+"137","Career Point Infosystems Ltd",4,1,3,0,0
+"138","Tirupati Inks Ltd",1,1,0,1,0
+"139","Indosolar Ltd",4,5,1,1,0
+"140","Gujarat Pipavav Port Ltd (GPPL)",3,19,5,2,0
+"141","Prakash Steelage Ltd",6,10,2,0,0
+"142","Bajaj Corp Limited",3,21,1,1,0
+"143","SKS Microfinance Ltd",3,9,6,0,0
+"144","Engineers India Ltd",1,21,2,0,0
+"145","Midfield Industries Ltd",6,16,0,1,0
+"146","Hindustan Media Ventures Ltd",3,19,3,0,0
+"147","Technofab Engineering Ltd",4,9,4,0,0
+"149","Aster Silicates Ltd",6,10,0,1,0
+"150","Parabolic Drugs Limited",6,3,0,2,0
+"151","Fatpipe Networks India Limited",6,1,0,1,0
+"152","Standard Chartered PLC",1,9,0,0,0
+"153","SJVN Ltd (Satluj Jal Vidyut Nigam Ltd)",3,20,11,0,0
+"154","Jaypee Infratech Ltd",4,9,4,2,1
+"155","Tara Health Foods Limited",6,24,0,1,0
+"156","Mandhana Industries Limited",4,24,1,0,0
+"157","Tarapur Transformers Limited",5,22,0,1,0
+"158","Nitesh Estates Limited",6,18,0,0,0
+"159","Talwalkars Better value Fitness Ltd",4,9,2,0,0
+"160","Goenka Diamond & Jewels Ltd",6,3,0,1,0
+"161","Intrasoft Technologies Limited",4,8,0,2,0
+"162","Shree Ganesh Jewellery House Ltd",4,7,3,0,1
+"163","Persistent Systems Limited",3,13,0,0,0
+"164","IL&FS Transportation Networks Ltd",3,21,4,0,0
+"165","Pradip Overseas Limited",6,24,0,0,0
+"166","NMDC Limited",1,9,0,1,0
+"167","DQ Entertainment (International) Ltd",4,5,0,0,0
+"168","United Bank of India",4,12,3,0,0
+"170","Rural Electrification Corporation Ltd",1,13,8,0,0
+"171","Man Infraconstruction Ltd",4,9,5,1,0
+"172","Texmo Pipes & Products Ltd",6,1,0,2,0
+"173","Hathway Cable & Datacom Ltd",4,5,0,0,0
+"174","ARSS Infrastructure Projects Ltd",6,9,1,0,0
+"175","NTPC Limited",1,21,0,0,0
+"176","Emmbi Polyarns Limited",6,1,2,0,0
+"177","D B Realty Limited",6,10,3,2,0
+"178","Vascon Engineers Limited",4,18,4,2,0
+"179","Syncom Healthcare Limited",6,17,1,1,1
+"180","Thangamayil Jewellery Limited",4,1,4,1,0
+"181","Aqua Logistics Ltd",4,24,1,2,0
+"182","Jubilant Foodworks Ltd",4,9,5,1,0
+"183","Birla Shloka Edutech Limited",1,1,2,1,0
+"184","Infinite Computer Solutions India Ltd",6,9,6,1,0
+"185","D B Corp Limited",3,9,2,0,0
+"186","Godrej Properties Limited",3,7,2,2,2
+"187","JSW Energy Limited",3,13,5,2,1
+"188","MBL Infrastructures Ltd",6,9,3,2,0
+"189","Cox and Kings (India) Limited",3,21,7,0,0
+"191","Astec LifeSciences Limited",6,3,0,0,0
+"192","Den Networks Limited",4,5,1,0,0
+"193","Indiabulls Power Limited",4,4,4,1,0
+"194","Thinksoft Global Services Ltd",6,7,0,0,0
+"195","Euro Multivision Limited",4,10,0,1,0
+"196","Pipavav Shipyard Limited",4,24,3,6,0
+"197","Oil India Limited",3,9,9,0,0
+"198","Globus Spirits Limited",4,1,2,0,0
+"199","Jindal Cotex Limited",4,3,1,2,0
+"200","NHPC Limited",4,19,11,0,0
+"201","Adani Power Limited",4,9,5,0,1
+"202","Raj Oil Mills Limited",6,3,1,0,1
+"203","Excel Infoways Limited",5,1,0,0,0
+"204","Mahindra Holidays and Resorts India Ltd",3,18,5,2,0
+"205","Rishabhdev Technocable Ltd",1,1,1,1,0
+"206","Edserv Softsystems Limited",5,1,0,1,0
+"207","Gemini Engi-Fab Limited",6,1,0,0,0
+"208","Alkali Metals Limited",6,1,1,2,0
+"209","Chemcel Bio-tech Limited",5,10,0,3,0
+"210","20 Microns Limited",4,6,2,0,2
+"212","Resurgere Mines & Minerals India Ltd",5,11,2,0,2
+"213","Austral Coke & Projects Ltd",6,4,1,0,1
+"214","Nu Tek India Limited",4,7,3,1,1
+"215","Vishal Information Technologies Ltd",4,1,0,3,0
+"216","Birla Cotsyn (India) Limited",4,11,1,1,1
+"217","KSK Energy Ventures Ltd",4,3,2,3,0
+"218","Somi Conveyor Beltings Limited",6,1,1,3,0
+"219","Lotus Eye Care Hospital Limited",4,1,2,0,0
+"220","Archidply Industries Ltd",4,3,2,0,0
+"221","First Winner Industries Limited",1,16,1,2,1
+"222","Sejal Architectural Glass Ltd",1,16,2,1,1
+"223","Avon Weighing Systems Limited",6,1,1,0,0
+"224","Bafna Pharmaceuticals Limited",1,1,2,2,0
+"225","Niraj Cement Structurals Ltd",5,3,1,3,0
+"226","Anu's Laboratories Limited",6,5,2,2,0
+"227","Gokul Refoils and Solvent Limited",4,5,6,2,0
+"228","Aishwarya Telecom Limited",6,1,1,2,0
+"229","Titagarh Wagons Limited",1,9,6,1,0
+"230","Kiri Dyes and Chemicals Limited",6,3,3,2,0
+"231","Sita Shree Food Products Ltd",6,1,3,3,0
+"233","Gammon Infrastructure Projects Ltd",3,8,3,3,0
+"234","Rural Electrification Corporation Ltd.",4,19,12,0,0
+"235","GSS America Infotech Ltd",1,7,1,2,0
+"236","V-Guard Industries Limited",4,9,2,2,0
+"237","SVEC Constructions Ltd",1,1,4,0,0
+"238","Tulsi Extrusions Limited",4,18,4,0,0
+"239","Shriram EPC Limited",4,9,5,1,0
+"240","Wockhardt Hospitals Ltd",3,7,4,5,0
+"241","Emaar MGF Land Ltd",3,19,7,0,0
+"242","Manjushree Extrusions Ltd",1,24,1,0,0
+"243","IRB Infrastructure Developers Ltd",3,9,7,0,0
+"244","Bang Overseas Limited",6,6,2,1,0
+"245","KNR Constructions Limited",4,8,6,0,1
+"246","OnMobile Global Limited",3,8,7,0,0
+"247","Cords Cable Industries Limited",4,12,6,0,0
+"248","J Kumar Infraprojects Limited",6,7,1,1,0
+"249","Reliance Power Limited",3,13,6,1,0
+"250","Future Capital Holdings Ltd",4,8,6,1,0
+"251","Precision Pipes and Profiles Company Ltd",1,20,4,1,0
+"252","Manaksia Limited",1,12,4,0,0
+"254","Porwal Auto Components Limited",1,1,2,3,0
+"255","Aries Agro Limited",1,9,4,2,0
+"256","Brigade Enterprises Limited",1,6,5,0,0
+"257","Transformers and Rectifiers India Ltd",1,9,3,1,0
+"258","eClerx Services Limited",4,8,4,1,0
+"259","BGR Energy Systems Limited",4,9,6,0,0
+"260","Burnpur Cement Limited",1,1,3,2,0
+"261","Kaushalya Infrastructure Dev Corp Ltd",1,5,0,1,0
+"262","Jyothi Laboratories Limited",1,8,2,0,0
+"263","Renaissance Jewellery Limited",6,7,1,1,0
+"264","Kolte-Patil Developers Limited",1,7,2,0,0
+"265","Edelweiss Capital Limited",3,20,5,0,0
+"266","Empee Distilleries Limited",1,12,1,0,0
+"267","Barak Valley Cements Ltd",1,1,0,1,0
+"268","Varun Industries Limited",5,1,2,0,0
+"269","Mundra Port and Special Economic Zone Ltd",1,21,2,0,0
+"270","Religare Enterprises Limited",4,20,3,0,0
+"271","SVPCL Limited",1,1,0,1,0
+"272","Rathi Bars Ltd",1,1,0,1,0
+"273","Maytas Infra Limited",1,8,2,1,0
+"275","Saamya Biotech India Ltd",5,1,0,1,0
+"276","Supreme Infrastructure India Ltd",1,9,1,1,0
+"277","Circuit Systems (India) Ltd",1,1,0,1,0
+"278","Consolidated Construction Consortium Ltd",4,8,2,1,0
+"279","Koutons Retail India Limited",1,8,3,0,0
+"280","Dhanus Technologies Limited",1,20,2,1,0
+"281","Kaveri Seed Company Limited",1,7,2,1,0
+"282","Allied Computers International (Asia) Ltd",5,1,0,1,0
+"283","Power Grid Corporation of India Ltd.",1,25,5,0,0
+"284","IT People (India) Limited",1,1,1,1,0
+"285","Magnum Ventures Limited",1,1,0,1,0
+"286","Indowind Energy Limited",6,7,0,1,0
+"287","Motilal Oswal Financial Services Ltd",1,12,2,0,0
+"288","Dagger Forst Tools Ltd",1,1,0,1,0
+"289","K.P.R. Mill Limited",1,6,1,2,0
+"290","TAKE Solutions Limited",1,13,0,1,0
+"291","Puravankara Projects Limited",1,9,2,1,0
+"292","SEL Manufacturing Company Ltd",1,1,1,1,0
+"293","Asian Granito India Ltd",1,7,3,0,0
+"294","IVR Prime Urban Developers Ltd",1,8,1,2,0
+"296","Zylog Systems Limited",1,20,3,0,0
+"297","Central Bank of India",1,19,2,1,0
+"298","Refex Refrigerants Limited",1,1,0,1,0
+"299","Omnitech InfoSolutions Limited",1,1,1,0,0
+"300","Simplex Projects Limited",1,9,1,1,0
+"301","Alpa Laboratories Limited",1,6,0,1,0
+"302","Omaxe Limited",1,12,3,0,0
+"303","Allied Digital Services Limited",1,1,2,0,0
+"304","Everonn Systems India Limited",1,9,2,0,0
+"305","Housing Development and Infrastructure Ltd",1,12,2,0,0
+"306","Spice Communications Limited",1,12,2,1,0
+"307","Suryachakra Power Corporation Ltd",6,1,0,2,0
+"308","BEML LTD (Bharat Earth Movers Ltd)",1,14,2,0,0
+"309","ICICI Bank Limited",1,14,1,0,0
+"310","Ankit Metal & Power Ltd",5,1,0,1,0
+"311","Celestial Labs Limited",5,1,1,0,0
+"312","Vishal Retail Ltd",1,20,3,0,0
+"313","Roman Tarmat Limited",1,7,0,2,0
+"314","Nelcast Limited",1,12,1,1,0
+"315","Meghmani Organics Limited",1,12,2,1,0
+"317","DLF Limited",1,5,3,0,0
+"318","Decolight Ceramics Limited",1,1,0,2,0
+"319","Time Technoplast Limited",1,19,1,0,0
+"320","Nitin Fire Protection Industries Ltd",1,19,2,0,0
+"321","Glory Polyfilms Ltd",1,1,0,0,0
+"322","Asahi Songwon Colors Ltd",1,1,0,0,0
+"323","Insecticides India Ltd",1,1,0,0,0
+"324","Binani Cement Limited",1,18,1,0,0
+"325","MIC Electronics Limited",1,19,1,0,0
+"326","Bhagwati Banquets And Hotels Ltd",5,1,0,1,0
+"327","Fortis Healthcare Ltd",1,3,0,1,0
+"328","Hilton Metal Forging Ltd",6,1,0,1,0
+"329","Ammana Bio Pharma Limited",1,1,0,0,0
+"330","Advanta India Limited",1,7,0,0,0
+"331","Orbit Corporation Limited",1,24,0,1,0
+"332","ICRA Limited",1,14,0,0,0
+"333","Abhishek Mills Ltd",1,1,0,0,0
+"334","Gremach Infrastructure Ltd",1,1,0,1,0
+"335","Page Industries Ltd (Jockey India)",1,8,0,1,0
+"336","Vimal Oil and Foods Limited",1,1,0,0,0
+"338","Tubeknit Fashions Limited",4,1,0,0,0
+"339","Raj Television Network Ltd",1,1,0,1,0
+"340","AMD Metplast Limited",1,1,0,0,0
+"341","Indus Fila Limited",1,1,1,0,0
+"342","Astral Poly Technik Limited",1,1,0,0,0
+"343","Broadcast Initiatives Limited",1,1,0,1,0
+"344","MindTree Consulting Limited",1,25,1,0,0
+"345","Jagjanani Textiles Limited",1,1,0,0,0
+"346","Evinix Accessories Limited",1,1,0,0,0
+"347","Oriental Trimex Limited",1,1,0,0,0
+"348","Vijayeswari Textiles Limited",1,1,0,1,0
+"349","Mudra Lifestyle Limited",1,1,1,0,0
+"350","Euro Ceramics Limited",1,1,1,0,0
+"351","C & C Constructions Limited",1,1,1,0,0
+"352","Lawreshwar Polymers Ltd",1,1,0,0,0
+"353","SMS Pharmaceuticals Limited",1,1,1,0,0
+"354","Idea Cellular Limited",1,14,1,0,0
+"355","Firstsource Solutions Limited",1,14,1,0,0
+"356","Indian Bank",1,12,1,0,0
+"357","Transwarranty Finance Ltd",1,1,0,0,0
+"359","Redington (India) Limited",1,9,1,0,0
+"360","Power Finance Corporation Ltd.",1,9,1,0,0
+"361","Technocraft Industries (India) Ltd",1,5,0,1,0
+"362","Akruti Nirman Limited",1,8,0,0,0
+"363","Cinemax India Ltd",1,20,1,0,0
+"364","Yogindera Worsted Limited",1,1,0,0,0
+"365","Pochiraju Industries Limited",1,1,0,0,0
+"366","Global Broadcast News Ltd",1,19,0,0,0
+"367","House of Pearl Fashions Ltd",1,12,0,1,0
+"368","Autoline Industries Limited",1,8,1,0,0
+"369","Cambridge Technology Enterprises Ltd",1,1,0,1,0
+"370","Shree Ashtavinayak Cine Vision",6,1,0,0,0
+"371","Pyramid Saimira Theatre Ltd",1,1,0,0,0
+"372","Lumax Auto Technologies Ltd",1,1,0,0,0
+"373","Nissan Copper Ltd",1,1,0,0,0
+"374","Tanla Solutions Ltd",1,1,0,0,0
+"375","Ess Dee Aluminium Ltd",1,1,0,0,0
+"376","Cairn India Ltd",1,1,0,0,0
+"377","XL Telecom Ltd",1,1,0,0,0
+"378","KLRF Limited",1,1,0,0,0
+"380","L.T. Overseas Limited",1,1,0,0,0
+"381","Ruchira Papers Limited",1,1,0,0,0
+"382","Gulshan Sugars & Chemicals Ltd",1,1,0,0,0
+"383","Blue Bird Limited",1,1,0,0,0
+"384","Sobha Developers Ltd",1,1,0,0,0
+"385","Lanco Infratech Limited",1,1,0,0,0
+"386","Parsvnath Developers Limited",1,1,0,0,0
+"387","Info Edge India Ltd (Naukri.com)",1,1,0,0,0
+"388","Zenith Birla (India) Limited",1,1,0,0,0
+"389","Development Credit Bank Ltd",1,1,0,0,0
+"390","Global Vectra Helicorp Ltd",1,1,0,0,0
+"391","Accel Frontline Limited",1,1,0,0,0
+"392","Hanung Toys And Textiles Ltd",1,1,0,0,0
+"393","JHS Svendgaard Laboratories Ltd",1,1,0,0,0
+"394","Minar International Limited",6,1,0,0,0
+"395","Gayatri Projects Limited",1,1,0,0,0
+"396","Fiem Industries Limited",1,1,0,0,0
+"397","Richa Knits Limited",1,1,0,0,0
+"398","Gwalior Chemical Industries Ltd",1,1,0,0,0
+"399","Usher Agro Ltd",1,1,0,0,0
+"401","HOV Services Limited",1,1,0,0,0
+"402","Atlanta Limited",1,1,0,0,0
+"403","Action Construction Equipment Ltd",1,1,0,0,0
+"404","KEW Industries Limted",1,1,0,0,0
+"405","Deep Industries Ltd",1,1,0,0,0
+"406","Voltamp Transformers Limited",1,1,0,0,0
