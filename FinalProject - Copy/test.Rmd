@@ -1,0 +1,18 @@
+---
+title: "Testing rCharts in new rmarkdown"
+author: "Ramnath"
+date: "July 2, 2014"
+output: html_document
+---
+
+This is a quick test of rCharts in new version of rmarkdown.
+
+
+```{r results = 'asis', comment = NA}
+require(rCharts)
+require(knitr)
+hair_eye_male <- subset(as.data.frame(HairEyeColor), Sex == "Male")
+n1 <- nPlot(Freq ~ Hair, group = "Eye", data = hair_eye_male, 
+            type = 'multiBarChart')
+n1$show("iframesrc", cdn = TRUE)
+```
