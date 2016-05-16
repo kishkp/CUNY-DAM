@@ -1,17 +1,9 @@
 library(shiny)
-library(rvest)
-library(XML)
 library(RMySQL)
-library(stringr)
-library(lubridate)
-library(RCurl)
 library(tidyr)
 library(ggplot2)
-library(rCharts)
-library(plyr)
 library(reshape2)
-library(rjson)
-library(knitr)
+
 
 shinyUI(navbarPage("IPO Performance Forecasting",
                    tabPanel("About",
@@ -21,6 +13,11 @@ shinyUI(navbarPage("IPO Performance Forecasting",
                         br(),
                         h4("Data that is used in the Analysis"),
                         p("The data that is used is as below:", br(),"1. BSE Index data - This data will give me the trend of the market on the day the IPO listed. I reason that IPOs may be successful if the market is on a upward swing during the listing. I intend to use the DMA (Daily Moving Average) to determine the trend. I consider the trend as:",br(), "Positive - if the day previous to the listing day closed higher than previous day DMA for the index",br(),"Negative - if the day previous to the listing day closed Lower or equal to previous day DMA for the index",br(),"2. Pre-IPO Data - This is data about the IPO issue. Some of this is IPO rating, IPO Reviews, IPO Over/Under Subscribed, etc"),
+                        br(),
+                        p("The complete data gathering script can be found at: https://github.com/kishkp/CUNY-DAM/blob/master/FinalProject/datagather.R" ),
+                        br(),
+                        p("The above link includes the web scraping part"),
+
                         br(),
                         br(),
                         h4("Training and Testing"),
@@ -36,7 +33,7 @@ shinyUI(navbarPage("IPO Performance Forecasting",
                                             label = "Select the data sources you want to see",
                                             choices = c("IPO_Issue_Details","Company_Sectors","IPO_ListingDates",
                                                         "IPO_OverSub_ListingGains","IPO_Rating_Details",
-                                                        "BSEData","LeadManager_IPO_List", "AllData"),
+                                                        "BSEData"),
                                             selected = "IPO_Issue_Details")
                             ),
                             mainPanel(
@@ -57,6 +54,7 @@ shinyUI(navbarPage("IPO Performance Forecasting",
                                 mainPanel(
                                     h2("Data Transformations"), 
                                     br(),
+                                    p("The following transformations have been carried out on the data:"),
                                     h4("1. Date Related transformations"), 
                                     br(), 
                                     "Generate a WeekDay", 
@@ -102,16 +100,16 @@ shinyUI(navbarPage("IPO Performance Forecasting",
                         sidebarLayout(
                             sidebarPanel(
                                 helpText("This tab will do some basic exploratory analysis. Select a variable to see the charts appropriate to the selected variable"),
-#                                 selectInput("exploreVar", 
-#                                             label = "Select a variable:",
-#                                             choices = c('IssuePrice', 'IssueType', 'IssueSize', 'IssuerSector', 'ListingMonth', 'IPORating', 'ListingWeekDay', 'Trend', 'SubscriptionRate', 'ReviewScore'),
-#                                             selected = "IssuePrice")
-#                             ),
-                            selectInput("exploreVar", 
-                                        label = "Select a variable:",
-                                        choices = c('IssuePrice', 'IssueSize', 'SubscriptionRate', 'ReviewScore'),
-                                        selected = "IssuePrice")
-                        ),
+                                selectInput("exploreVar", 
+                                            label = "Select a variable:",
+                                            choices = c('IssuePrice', 'IssueType', 'IssueSize', 'IssuerSector', 'ListingMonth', 'IPORating', 'ListingWeekDay', 'Trend', 'SubscriptionRate', 'ReviewScore'),
+                                            selected = "IssuePrice")
+                            ),
+#                             selectInput("exploreVar", 
+#                                         label = "Select a variable:",
+#                                         choices = c('IssuePrice', 'IssueSize', 'SubscriptionRate', 'ReviewScore'),
+#                                         selected = "IssuePrice")
+#                         ),
                         
                                 mainPanel(
                                 textOutput("text2"),
@@ -121,17 +119,34 @@ shinyUI(navbarPage("IPO Performance Forecasting",
                    ), 
                    
                    tabPanel("Model Training / Evaluation",
-                            titlePanel("Model Training"),
-                            sidebarLayout(
-                                sidebarPanel(
-                                ),
-                                mainPanel(
-                                    textOutput("text3"),
-                                    textOutput("text4"),
-                                    tableOutput("table4")
-                                    
-                                )
-                            )                   
+                        h4("Logistic Regression: I have used logistic regression for building the model."),
+                        br(),
+                        p("Below is the regression equation :"),
+                        textOutput("text3"),
+                        br(),
+                        br(),
+                        br(),
+                        h4("Applying the above model to the test data, I get the following results:"),
+                        br(),
+                        tableOutput("table4"),
+                        br(),
+                        br(),
+                        h4("The following is the contingency table for the results:"),
+                        br(),
+                        tableOutput("table5"),
+                        br(),
+                        h4("Below is the proportions:"),
+                        br(),
+                        tableOutput("table6"),
+                        br(),
+                        br(),
+                        h4("Below is the Accuracy rate of the model:"),
+                        br(),
+                        br(),
+                        textOutput("text4"),
+                        br(),
+                        br(),
+                        h4("This concludes the project")
                    ) 
                    
 ))
