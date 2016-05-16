@@ -14,7 +14,7 @@ shinyUI(navbarPage("IPO Performance Forecasting",
                         h4("Data that is used in the Analysis"),
                         p("The data that is used is as below:", br(),"1. BSE Index data - This data will give me the trend of the market on the day the IPO listed. I reason that IPOs may be successful if the market is on a upward swing during the listing. I intend to use the DMA (Daily Moving Average) to determine the trend. I consider the trend as:",br(), "Positive - if the day previous to the listing day closed higher than previous day DMA for the index",br(),"Negative - if the day previous to the listing day closed Lower or equal to previous day DMA for the index",br(),"2. Pre-IPO Data - This is data about the IPO issue. Some of this is IPO rating, IPO Reviews, IPO Over/Under Subscribed, etc"),
                         br(),
-                        p("The complete data gathering script can be found at: https://github.com/kishkp/CUNY-DAM/blob/master/FinalProject/datagather.R" ),
+                        p("The complete data gathering script can be found at: https://github.com/kishkp/CUNY-DAM/blob/master/FinalProject%20-%20withoutshiny/datagather.R" ),
                         br(),
                         p("The above link includes the web scraping part"),
 
